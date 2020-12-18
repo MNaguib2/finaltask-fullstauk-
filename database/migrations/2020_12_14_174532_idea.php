@@ -17,6 +17,7 @@ class Idea extends Migration
             $table->id();
             $table->string('name');
             $table->text('Discription');
+            $table->int('Position');
             $table->foreignId('category_id')->references('id')->on('Category')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

@@ -17,7 +17,6 @@ class User extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->text('Address2')->nullable();
             $table->text('Address');
             $table->string('password');
         });
