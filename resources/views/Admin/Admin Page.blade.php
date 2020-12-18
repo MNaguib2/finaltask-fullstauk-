@@ -70,7 +70,7 @@
 						@else
 						<button onclick="window.location='{{route('Resume_Member',$member->id)}}'" class="ButtonMember btn btn-warning">Resume</button>
 						@endif
-						<button class="ButtonMember btn btn-danger">Delete</button>
+						<button onclick="window.location='{{route('Delete_Member',$member->id)}}'" class="ButtonMember btn btn-danger">Delete</button>
 					</div>
 					@endif
 					@endforeach
@@ -88,20 +88,23 @@
 				</thead>
 				<tbody>
 				@foreach($Categories as $member)
-					<tr>
-					   <th scope="row">{{$loop->iteration}}</th>
+					<tr>						
+					   <th>{{$loop->iteration}}</th>
 					   <td>{{$member->name}}</td>
-					   <td>{{$member->Discrpition}}</td>
+					   <td>{{$member->Discription}}</td>
 					   <td>{{$member->created_at}}</td>
+					   @csrf  
 					   <td>    
-						   <a href="#" class="d-inline-block control-button delete mb-2 m-lg-0"><i class="fas fa-trash-alt"></i> delete</a>
-						  <a href="#" id="row-1" onclick="edite({id})" class="d-inline-block control-button edit "><i class="fa fa-edit"></i> edit</a>
+						   <a href="{{route('Delete_Category',$member->id)}}" class="d-inline-block control-button delete mb-2 m-lg-0"><i class="fas fa-trash-alt"></i> delete</a>
+						  <a href="#" id="row-{{$loop->iteration}}" onclick="edite({id},{{$member->id}})" role="button" class="d-inline-block control-button edit "><i class="fa fa-edit"></i> edit</a>
 					   </td>
 					</tr>
 					@endforeach					
 					</tbody>
 				 </table>
-				 <i class="fas fa-plus fa-3x center" role="button" id="Addcategory" style="margin-left: 35vw;"></i>
+				 <i class="fas fa-plus fa-3x center"
+				 onclick="document.getElementById('id02').style.display='block'"
+				  role="button" id="Addcategory" style="margin-left: 35vw;"></i>
 			</div>
 			<div class="tab-pane fade" id="v-pills-settings" style="max-height: 75vh; overflow-y: auto;" role="tabpanel" aria-labelledby="v-pills-settings-tab">
 				@foreach($Categories as $catogry)
@@ -113,11 +116,11 @@
 					@if($idea->category_id == $catogry->id)
 						<div class="col-lg-3 col-md-4 col-sm-6">
 							<div class="card ">
-								<a href="./Detials Page/view.html"><img class="card-img-top"
+								<a href="{{route('view' , $idea->id)}}"><img class="card-img-top"
 										src="{{asset($idea->Image)}}" alt=""></a>
 								<div class="card-body">
 									<h4 class="card-title">
-										<a href="./Detials Page/view.html">{{$idea->name}}</a>
+										<a href="{{route('view' , $idea->id)}}">{{$idea->name}}</a>
 									</h4>
 									<h5>{{$idea->price}}$</h5>
 									<p class="card-text description" id="discription-{{$idea->id}}" style="display: inline;">{{$idea->Discription}}</p>
@@ -126,7 +129,25 @@
 										onclick="toggleContent({id})">Read More</a>
 								</div>
 								<div class="card-footer">
-									<small class="text-muted">&#9733; &#9733; &#9733; &#9733; &#9734;</small>
+								<small class="text-muted">
+								@switch($idea->Rate)
+								@case(1)
+									&#9733;
+									@break
+								@case(2)
+									&#9733; &#9733;
+									@break
+								@case(3)
+									&#9733; &#9733;  &#9733;
+									@break
+								@case(4)
+									&#9733; &#9733;  &#9733;  &#9733;
+									@break
+								@case(5)
+									&#9733; &#9733;  &#9733;  &#9733;  &#9733;
+									@break
+							@endswitch
+								</small>
 								</div>
 							</div>
 						</div>
@@ -140,3 +161,28 @@
 		</div>
 	</section>
 	@endsection
+	<section>
+	<div id="id02" class="modal signupfont">
+			<form id="formdesign" class="modal-content animate" action="{{route('AddCategory')}}" method="post">
+			@csrf
+				<div class="containerLog">
+					<div class="imgcontainer">
+						<span onclick="document.getElementById('id02').style.display='none'" class="close"
+							title="Close Modal">&times;</span>
+						<img src="{{asset('Image/add category.jpg')}}" alt="Avatar"
+							style="height: 30vh;width: 18vw; border-radius: 100%; border: 5px solid #9C9492;"
+							class="avatar">
+					</div>
+					<h1 id="add/edite" style="text-align: center;">Add New Category</h1>
+					<p>Please fill in this form to create an Category.</p>
+					<hr>
+					<label for="uname"><b>Name Category</b></label>
+					<input id="name" type="text" placeholder="Name Category" name="Name" required>
+
+					<label for="uname"><b>Discription</b></label>
+					<input id="Edit" type="text" placeholder="Discription" name="Discription" required>
+
+					<button id="editebutton" type="submit" class="registerbtn">Add New Category</button>
+				</div>
+
+			</section>

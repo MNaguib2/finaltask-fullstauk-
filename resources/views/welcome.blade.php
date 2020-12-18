@@ -57,11 +57,11 @@
 				@if($idea->category_id == $category->id)			
 					<div class="col-lg-3 col-md-4 col-sm-6">
 						<div class="card ">
-							<a href="./Detials Page/view.html"><img class="card-img-top"
+							<a href="{{route('view' , $idea->id)}}"><img class="card-img-top"
 									src="{{asset($idea->Image)}}" alt=""></a>
 							<div class="card-body">
 								<h4 class="card-title">
-									<a href="./Detials Page/view.html">{{$idea->name}}</a>
+									<a href="{{route('view' , $idea->id)}}">{{$idea->name}}</a>
 								</h4>
 								<h5>{{$idea->price}}$</h5>
 								<p class="card-text description" id="discription-{{$idea->id}}" style="display: inline;">{{$idea->Discription}}</p>

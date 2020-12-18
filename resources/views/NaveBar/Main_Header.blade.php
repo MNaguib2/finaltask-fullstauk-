@@ -47,9 +47,9 @@
 							role="button">{{ Auth::user()->email}}</label></img>
 						<div class="dropdown-menu">
 							<a class="dropdown-item" href="{{route('profile',Auth::user()->id)}}">Profile</a>
-							<a class="dropdown-item" href="../Edite Page/Edite Page.html">Add new think</a>
+							<a class="dropdown-item" href="{{route('Add_thing',Auth::user()->id)}}">Add new think</a>
 							@if(Auth::check() && Auth::user()->Position == 0)
-							<a class="dropdown-item" href="#">Setting</a>
+							<a class="dropdown-item" href="{{route('adminpage')}}">Setting</a>
 							@endif
 							<div class="dropdown-divider"></div>
 							<a class="dropdown-item" href="{{ route('logout') }}"
@@ -64,10 +64,12 @@
 					</li>
                           @endif
 				</ul>
+				<!--
 				<form class="form-inline my-2 my-lg-0">
 					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
 					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				</form>
+				-->
 			</div>
 		</nav>
 	</section>
@@ -78,7 +80,7 @@
 				<div class="imgcontainer">
 					<span onclick="document.getElementById('id01').style.display='none'" class="close"
 						style="right: 10vw;" title="Close Modal">&times;</span>
-					<img src="Image/download.png" alt="Avatar"
+					<img src="{{asset('Image/download.png')}}" alt="Avatar"
 						style="height: 30vh;width: 18vw; border-radius: 100%; border: 5px solid #9C9492;"
 						class="avatar">
 				</div>
@@ -108,7 +110,7 @@
 					<div class="imgcontainer">
 						<span onclick="document.getElementById('id02').style.display='none'" class="close"
 							title="Close Modal">&times;</span>
-						<img src="Image/download.png" alt="Avatar"
+						<img src="{{asset('Image/download.png')}}" alt="Avatar"
 							style="height: 30vh;width: 18vw; border-radius: 100%; border: 5px solid #9C9492;"
 							class="avatar">
 					</div>
@@ -119,7 +121,7 @@
 					<input type="text" placeholder="Enter Username" name="Name" required>
 
 					<label for="uname"><b>Address</b></label>
-					<input type="text" placeholder="Enter Username" name="Address" required>
+					<input type="text" placeholder="Enter Address" name="Address" required>
 
 					<label for="email"><b>Email</b></label>
 					<input type="email" placeholder="Enter Email" name="email" id="email" required email>

@@ -144,8 +144,9 @@
 <script src="{{asset('./JavaScript/js/jquery-3.5.1.min.js')}}"></script>
 <script src="{{asset('./JavaScript/js/popper.min.js')}}"></script>
 <script src="{{asset('JavaScript/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('./slick/slick.js" type="text/javascript')}}" charset="utf-8"></script>
+<!--<script src="{{asset('./slick/slick.js" type="text/javascript')}}" charset="utf-8"></script>-->
 <script type="{{asset('text/javascript" src="JavaScript/js/mdb.min.js')}}"></script>
+<script src="{{asset('./cssadmin/scriptadmin.js')}}"></script>
 <script src="{{asset('./JavaScript/script.js')}}"></script>
 @yield('js')
 </body>
