@@ -75,7 +75,7 @@
 		<button class="btn btn-primary" style="text-transform: capitalize;" type="submit">Add Information</button>
 		<!--///////////////////////////////////////////////////////////////////////////-->
 		
-		@elseif(Auth::user()->id == $iduser->user_id)
+		@elseif(Auth::user()->id == $iduser->user_id ||Auth::user()->Position == 0 )
 		<div class="form-row">
 		  <div class="col-md-6 mb-3">
 			<label for="title">Title</label>
@@ -104,6 +104,9 @@
 		<div class="form-row mt-2">
 		  <div class="col-md-4">
 			<label for="rate">Rate</label>
+			@if(Auth::user()->Position !== 0)
+			<p>Only Admin Can Change Rate (Your rate is {{$iduser->Rate}})</p>
+			@elseif(Auth::user()->Position == 0)
 			<select class="custom-select" name="rate" id="rate" required>
 			@switch($iduser->Rate)
 								@case(1)
@@ -148,6 +151,7 @@
 									@break
 							@endswitch
 			</select>
+			@endif
 		  </div>
 		  <div class="col-md-4">
 			<label for="categoryname">Category think</label>

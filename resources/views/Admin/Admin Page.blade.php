@@ -60,20 +60,38 @@
 			</div>
 			<div class="tab-pane fade" style="max-height: 75vh; overflow-y: auto;" id="v-pills-profile" role="tabpanel"
 				aria-labelledby="v-pills-profile-tab">
+				<table class="table table-striped text-center">
+					<thead class="thead-dark">
+					<tr>
+					   <td>#ID</td>
+					   <td>Name</td>
+					   <td>Address</td>
+					   <td>Email</td>
+					   <td>Control</td>
+					</tr>
+				</thead>
 				@foreach($Member as $member)
-				@if($member->Position != 0)
-					<div class="memberlist">
-						<h4 class="DetialsMember"><span class="titlemember">Name :</span>{{$member->name}}<span class="titlemember">ID : </span>{{$member->id}} <span class="titlemember">Email : </span>{{$member->email}}</h4>
-						<!--<span class="vertical"></span>-->
-						@if ($member->Position !== 2)
+				<tr>
+					   <th>{{$loop->iteration}}</th>
+					   <td>{{$member->	name}}</td>
+					   <td>{{$member-> Address}}</td>
+					   <td>{{$member->email}}</td>
+					   <td>
+						@if ($member->Position == 1)
 						<button onclick="window.location='{{route('Hold_Member',$member->id)}}'" class="ButtonMember btn btn-warning">Hold</button>
-						@else
-						<button onclick="window.location='{{route('Resume_Member',$member->id)}}'" class="ButtonMember btn btn-warning">Resume</button>
-						@endif
 						<button onclick="window.location='{{route('Delete_Member',$member->id)}}'" class="ButtonMember btn btn-danger">Delete</button>
+						@elseif ($member->Position == 2)
+						<button onclick="window.location='{{route('Resume_Member',$member->id)}}'" class="ButtonMember btn btn-warning">Resume</button>
+						<button onclick="window.location='{{route('Delete_Member',$member->id)}}'" class="ButtonMember btn btn-danger">Delete</button>
+						@elseif ($member->Position == 0)
+						<h3>this Acount is Admin</h3>
+						@endif
+						</td>
 					</div>
-					@endif
+					</tr>
 					@endforeach
+					</tbody>
+				 </table>
 			</div>
 			<div class="tab-pane fade" id="v-pills-messages" style="max-height: 65vh; overflow-y: auto;" role="tabpanel" aria-labelledby="v-pills-messages-tab">
 				<table id="Table_id" class="table table-striped text-center">
@@ -103,7 +121,7 @@
 					</tbody>
 				 </table>
 				 <i class="fas fa-plus fa-3x center"
-				 onclick="document.getElementById('id02').style.display='block'"
+				 onclick="Addthing()"
 				  role="button" id="Addcategory" style="margin-left: 35vw;"></i>
 			</div>
 			<div class="tab-pane fade" id="v-pills-settings" style="max-height: 75vh; overflow-y: auto;" role="tabpanel" aria-labelledby="v-pills-settings-tab">

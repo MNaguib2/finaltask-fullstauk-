@@ -113,8 +113,9 @@ class profilecontroller extends Controller
         $ideaupdate->Discription=$request->get('Discrpition');
         $ideaupdate->price=$request->get('price');
         $ideaupdate->Category_Id = $request->get('categoryname');
+        if (Auth::user()->Position == 0){
         $ideaupdate->Rate=$request->get('rate');
-
+        }
         if ($request->hasFile('image')) 
         {
             $file = $request->file('image');            
